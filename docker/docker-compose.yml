@@ -1,0 +1,138 @@
+services:
+
+  # ROS 2 development container for running ROS 2 nodes and development tools
+  ros_dev:
+
+    image: ros_core
+
+    container_name: ros_dev
+    hostname: ros-dev
+
+    network_mode: host
+
+    stdin_open: true
+    tty: true
+
+    restart: unless-stopped
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+
+    volumes:
+      - ./:/home/gs
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+    devices:
+      - /dev/dri:/dev/dri
+
+    group_add:
+      - render
+      - video
+
+    working_dir: /home/gs
+
+    command: sleep infinity
+
+  # Gazebo simulation container for running the Gazebo simulator with ROS 2 integration
+  gazebo_sim:
+
+    image: gazebo_sim
+
+    container_name: gazebo_sim
+    hostname: gazebo-sim
+
+    network_mode: host
+    ipc: host
+
+    stdin_open: true
+    tty: true
+
+    restart: unless-stopped
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+      - QT_X11_NO_MITSHM=1
+      - LIBGL_ALWAYS_SOFTWARE=0
+      - XDG_RUNTIME_DIR=/tmp/runtime-gs
+
+    volumes:
+      - ./:/home/gs
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+    devices:
+      - /dev/dri:/dev/dri
+
+    group_add:
+      - render
+      - video
+
+    working_dir: /home/gs
+
+    command: sleep infinity
+
+  # PX4 SITL container for running the PX4 flight stack in simulation mode
+  px4_sitl:
+
+    image: px4_sitl
+
+    container_name: px4_sitl
+    hostname: px4-sitl
+
+    network_mode: host
+    ipc: host
+
+    stdin_open: true
+    tty: true
+
+    restart: unless-stopped
+
+    depends_on:
+      - gazebo_sim
+      - microxrce_agent
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+      - QT_X11_NO_MITSHM=1
+      - LIBGL_ALWAYS_SOFTWARE=0
+      - XDG_RUNTIME_DIR=/tmp/runtime-gs
+      - GZ_SIM_SYSTEM_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/gz-sim-8/plugins   
+
+    volumes:
+      - ./:/home/gs
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+    devices:
+      - /dev/dri:/dev/dri
+
+    group_add:
+      - render
+      - video
+
+    working_dir: /home/gs
+
+    command: sleep infinity
+
+  # Micro XRCE Agent for communication between PX4 SITL and ROS 2 nodes
+  microxrce_agent:
+
+    image: microxrce_agent
+
+    container_name: microxrce_agent
+    hostname: microxrce-agent
+
+    network_mode: host
+
+    stdin_open: true
+    tty: true
+
+    restart: unless-stopped
+
+    environment:
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+
+    working_dir: /home/gs
+
+    command: MicroXRCEAgent udp4 -p 8888

@@ -1,0 +1,59 @@
+# ROS 2
+build/
+install/
+log/
+
+# Colcon / Python
+*.pyc
+__pycache__/
+.cache/
+
+# VSCode
+.vscode/
+
+# Gazebo / Simulation Runtime
+.gz/
+.sdformat/
+
+# ROS Runtime
+.ros/
+
+# Linux User Files
+.bash_history
+.wget-hsts
+
+# PX4 Build Artifacts
+PX4-Autopilot/build/
+PX4-Autopilot/logs/
+PX4-Autopilot/.cache/
+
+# PX4 ROMFS generated files
+PX4-Autopilot/ROMFS/px4fmu_common/init.d-posix/airframes.xml
+
+# Temporary Files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Docker
+docker/**/*.tar
+
+# Ignition / Gazebo Fuel Cache
+.local/share/gz/
+.local/share/ignition/
+
+# ROS Bags
+*.db3
+*.mcap
+
+# Large Generated Assets
+*.ulg
+*.bag
+
+# JetBrains
+.idea/
+
+# Python Virtual Environments
+venv/
+.venv/
