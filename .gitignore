@@ -57,3 +57,6 @@ docker/**/*.tar
 # Python Virtual Environments
 venv/
 .venv/
+
+#  User-specific Local Files
+.local/
