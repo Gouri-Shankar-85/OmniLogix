@@ -20,7 +20,7 @@ services:
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
 
     volumes:
-      - ../:/home/gs
+      - ../:/home/omnilogix
       - /tmp/.X11-unix:/tmp/.X11-unix
 
     devices:
@@ -30,7 +30,7 @@ services:
       - render
       - video
 
-    working_dir: /home/gs
+    working_dir: /home/omnilogix
 
     command: sleep infinity
 
@@ -58,7 +58,7 @@ services:
       - XDG_RUNTIME_DIR=/tmp/runtime-gs
 
     volumes:
-      - ../:/home/gs
+      - ../:/home/omnilogix
       - /tmp/.X11-unix:/tmp/.X11-unix
 
     devices:
@@ -68,7 +68,7 @@ services:
       - render
       - video
 
-    working_dir: /home/gs
+    working_dir: /home/omnilogix
 
     command: sleep infinity
 
@@ -101,7 +101,7 @@ services:
       - GZ_SIM_SYSTEM_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/gz-sim-8/plugins   
 
     volumes:
-      - ../:/home/gs
+      - ../:/home/omnilogix
       - /tmp/.X11-unix:/tmp/.X11-unix
 
     devices:
@@ -111,7 +111,7 @@ services:
       - render
       - video
 
-    working_dir: /home/gs
+    working_dir: /home/omnilogix
 
     command: sleep infinity
 
@@ -133,6 +133,6 @@ services:
     environment:
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
 
-    working_dir: /home/gs
+    working_dir: /home/omnilogix
 
     command: MicroXRCEAgent udp4 -p 8888

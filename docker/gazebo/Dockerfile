@@ -39,10 +39,10 @@ RUN apt update && \
 RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 
 # Add User To GPU Groups
-RUN usermod -aG render,video gs
+RUN usermod -aG render,video omnilogix
 
 # Switch Back to Non-Root User
-USER gs
+USER omnilogix
 
 # Default Startup
 CMD ["sleep", "infinity"]

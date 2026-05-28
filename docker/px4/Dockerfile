@@ -22,7 +22,7 @@ RUN apt update && \
     default-jre && \
     rm -rf /var/lib/apt/lists/*
 
-USER gs
+USER omnilogix
 
 # Default Startup
 CMD ["sleep", "infinity"]

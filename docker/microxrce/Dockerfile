@@ -28,7 +28,7 @@ RUN mkdir build && \
     make install && \
     ldconfig
 
-USER gs
+USER omnilogix
 
 # Default Startup
 CMD ["MicroXRCEAgent", "udp4", "-p", "8888"]

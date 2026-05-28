@@ -5,7 +5,7 @@ FROM ubuntu:24.04
 SHELL ["/bin/bash", "-c"]
 
 # Build arguments
-ARG USERNAME=developer
+ARG USERNAME=omnilogix
 ARG USER_UID=1000
 ARG USER_GID=${USER_UID}
 
@@ -81,7 +81,14 @@ RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y \
     ros-jazzy-desktop \
     ros-dev-tools \
-    python3-colcon-common-extensions && \
+    python3-colcon-common-extensions \
+    ros-jazzy-joint-state-publisher \
+    ros-jazzy-joint-state-publisher-gui \
+    ros-jazzy-xacro \
+    ros-jazzy-ros2-control \
+    ros-jazzy-ros2-controllers \
+    ros-jazzy-controller-manager \
+    ros-jazzy-gz-ros2-control && \
     rm -rf /var/lib/apt/lists/*
 
 # Create non-root user
