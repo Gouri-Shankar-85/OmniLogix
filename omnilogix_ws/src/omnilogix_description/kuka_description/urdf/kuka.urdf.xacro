@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot xmlns:xacro ="http://wiki.ros.org/xacro">
+<robot xmlns:xacro ="http://wiki.ros.org/xacro" name="kuka_kr16_2">
 
-    <xacro:include filename="$(find kuka_description)/urdf/description/kr_16_2.xacro"/>
+    <xacro:include filename="$(find kuka_description)/urdf/description/kr16_2.xacro"/>
     <xacro:include filename="$(find kuka_description)/urdf/control/kuka.ros2_control.xacro"/>
 
     <link name="world"/>

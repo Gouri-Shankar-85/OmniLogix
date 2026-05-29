@@ -19,7 +19,7 @@ def generate_launch_description():
     xacro_file = os.path.join(pkg_share, 'urdf', 'kuka.urdf.xacro')
     
     robot_description = ParameterValue(
-        Command(['xacro', xacro_file]),
+        Command(['xacro ', xacro_file]),
         value_type=str
     )
         
