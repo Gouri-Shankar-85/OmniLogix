@@ -7,6 +7,8 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(omnilogix_controller REQUIRED)
+find_package(xacro REQUIRED)
 
 install (
   DIRECTORY meshes launch urdf
