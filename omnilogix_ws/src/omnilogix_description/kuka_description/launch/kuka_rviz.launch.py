@@ -5,7 +5,8 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, Command
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.actions import Node
 
 def generate_launch_description():
@@ -15,10 +16,12 @@ def generate_launch_description():
     
     use_sim_time = LaunchConfiguration('use_sim_time')
     
-    urdf_file = os.path.join(pkg_share, 'urdf', 'kr16_2.urdf')
+    xacro_file = os.path.join(pkg_share, 'urdf', 'kuka.urdf.xacro')
     
-    with open(urdf_file, 'r') as urdf:
-        robot_description = urdf.read()
+    robot_description = ParameterValue(
+        Command(['xacro', xacro_file]),
+        value_type=str
+    )
         
     rsp_node = Node(
         package = 'robot_state_publisher',
@@ -41,7 +44,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'use_sim_time',
             default_value = 'false',
-            description = 'Use simulation clock time'
+            description = 'If true: use simulation clock time'
         ),
         rsp_node,
         jsp_gui_node
