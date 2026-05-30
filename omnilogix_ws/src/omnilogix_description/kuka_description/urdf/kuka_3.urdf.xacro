@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro ="http://wiki.ros.org/xacro" name="kuka_kr16_2">
+
+    <xacro:include filename="$(find kuka_description)/urdf/description/kr16_2.xacro"/>
+    <xacro:include filename="$(find kuka_description)/urdf/control/kuka.ros2_control.xacro"/>
+
+    <link name="world"/>
+
+    <xacro:kuka_arm prefix="kuka_3_"/>
+
+    <joint name="world_to_kuka_3_base" type="fixed">
+        <parent link="world"/>
+        <child link="kuka_3_base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <xacro:kuka_kr16_2_ros2_control prefix="kuka_3_"/>
+
+    <gazebo>
+        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find omnilogix_controller)/config/kuka_3_controller.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+</robot>

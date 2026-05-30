@@ -1,0 +1,53 @@
+controller_manager:
+  ros__parameters:
+
+    update_rate: 100
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster_jointStateBroadcaster
+
+    # --------------Arm_1----------------
+    kuka_1_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+joint_state_broadcaster:
+  ros__parameters:
+
+    joints: []
+    interfaces: []
+    
+    use_local_topics: true 
+    use_urdf_to_filter: true # only publish joints which are in the urdf
+    frame_id: world
+
+    publish_dynamic_joint_states: true
+
+kuka_1_controller:
+  ros__parameters:
+
+    joints: 
+      - kuka_1_joint_a1
+      - kuka_1_joint_a2
+      - kuka_1_joint_a3
+      - kuka_1_joint_a4
+      - kuka_1_joint_a5
+      - kuka_1_joint_a6
+      
+    command_interfaces:
+      - position
+
+    state_interfaces:
+      - position
+      - velocity
+      - effort
+
+    allow_partial_joints_goal: true
+
+    action_monitor_rate: 20
+
+    interpolation_method: splines
+
+    constraints:
+      goal_time: 0.5
+      stopped_velocity_tolerance: 0.01
