@@ -52,7 +52,8 @@ def generate_launch_description():
         actions = [
             Node(
                 package = 'controller_manager',
-                executable = 'ros2_control_node',
+                executable = 'spawner',
+                namespace = arm,
                 arguments = [
                     'joint_state_broadcaster',
                     '--controller-manager', f'/{arm}/controller_manager'
@@ -63,7 +64,8 @@ def generate_launch_description():
         ] + [
             Node(
                 package = 'controller_manager',
-                executable = 'ros2_control_node',
+                executable = 'spawner',
+                namespace = arm,
                 arguments = [
                     f'{arm}_controller',
                     '--controller-manager', f'/{arm}/controller_manager'
