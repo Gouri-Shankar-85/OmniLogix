@@ -5,7 +5,7 @@ controller_manager:
     use_sim_time: true
 
     joint_state_broadcaster:
-      type: joint_state_broadcaster_jointStateBroadcaster
+      type: joint_state_broadcaster/JointStateBroadcaster
 
     # --------------Arm_3----------------
     kuka_3_controller:
