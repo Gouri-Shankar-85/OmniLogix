@@ -14,9 +14,9 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.actions import Node
 
-def get_launch_description():
+def generate_launch_description():
     
-    desc_pkg_name = 'omnilogix_description'
+    desc_pkg_name = 'kuka_description'
     desc_pkg_share = get_package_share_directory(desc_pkg_name)
     
     ctrl_pkg_name = 'omnilogix_controller'
