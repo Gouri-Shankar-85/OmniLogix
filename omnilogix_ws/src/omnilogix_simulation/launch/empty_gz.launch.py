@@ -26,6 +26,7 @@ def generate_launch_description():
     world_file = os.path.join(sim_pkg_share, 'worlds', 'empty_world.sdf')
     bridge_file = os.path.join(sim_pkg_share, 'config', 'bridge.yaml')
     
+    # launch gz_sim with empty_world
     gz_node = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(gz_pkg_share, 'launch', 'gz_sim.launch.py')
@@ -35,6 +36,7 @@ def generate_launch_description():
         }.items()
     )
     
+    # node to bridge ROS to GZ topics or vice-versa
     bridge_node = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',

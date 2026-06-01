@@ -26,6 +26,7 @@ def generate_launch_description():
     
     arms = ['kuka_1', 'kuka_2', 'kuka_3', 'kuka_4']
     
+    # launch the robot description for all 4 arms
     desc_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(desc_pkg_share, 'launch', 'kuka_rviz.launch.py')
@@ -72,7 +73,7 @@ def generate_launch_description():
                 ],
                 output = 'screen',
             )
-            for arm in arms
+            for arm in arms   
         ] + [
             Node(
                 package = 'controller_manager',
@@ -87,7 +88,7 @@ def generate_launch_description():
                 ],
                 output = 'screen',
             )
-            for arm in arms
+            for arm in arms 
         ]
     )
     

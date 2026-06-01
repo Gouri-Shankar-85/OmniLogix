@@ -27,11 +27,13 @@ def generate_launch_description():
     desc_pkg = 'kuka_description'
     desc_pkg_share = get_package_share_directory(desc_pkg)
     
+    # set GZ_SIM_RESOURCE_PATH to find the xacro files in kuka_description package
     set_gz_resource_path = SetEnvironmentVariable(
         name='GZ_SIM_RESOURCE_PATH',
         value=os.path.dirname(desc_pkg_share)
     )
     
+    # launch gazebo sim with empty world
     sim_node = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(sim_pkg_share, 'launch', 'empty_gz.launch.py')
@@ -39,6 +41,7 @@ def generate_launch_description():
         launch_arguments = {'use_sim_time': use_sim_time}.items()
     )
     
+    # list of arms with their spawn poses
     arms = [
         ('kuka_1',  0.0,  0.0, 0.0),
         ('kuka_2',  5.0,  0.0, 0.0),
@@ -46,6 +49,7 @@ def generate_launch_description():
         ('kuka_4',  5.0,  5.0, 0.0),
     ]
     
+    # spawn arms in gz in 4 different poses
     spawn_arms = TimerAction(
         period=5.0,                             
         actions=[
@@ -65,6 +69,7 @@ def generate_launch_description():
         ]
     )
 
+    # launch arm controller node with delay time
     kuka_arm_node = TimerAction(
         period=10.0,
         actions=[
