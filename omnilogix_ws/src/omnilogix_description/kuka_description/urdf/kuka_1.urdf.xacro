@@ -20,7 +20,7 @@
 
     <gazebo>
         <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-            <parameters>${arg controller_path}</parameters>
+            <parameters>$(arg controller_path)</parameters>
             <ros>
                 <namespace>kuka_1</namespace>
             </ros>
