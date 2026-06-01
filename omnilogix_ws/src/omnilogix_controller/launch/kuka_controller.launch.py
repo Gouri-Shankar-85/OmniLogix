@@ -33,27 +33,27 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items()
     )
     
-    controller_managers = [
-        Node(
-            package = 'controller_manager',
-            executable = 'ros2_control_node',
-            namespace=arm,
-            parameters=[
-                os.path.join(ctrl_pkg_share, 'config', f'{arm}_controller.yaml'),
-                {
-                    'robot_description': ParameterValue(      
-                        Command(['xacro ', os.path.join(
-                            desc_pkg_share, 'urdf', f'{arm}.urdf.xacro'
-                        )]),
-                        value_type=str
-                    ),
-                    'use_sim_time': use_sim_time
-                }
-            ],
-            output = 'screen',
-        )
-        for arm in arms
-    ]
+    # controller_managers = [
+    #     Node(
+    #         package = 'controller_manager',
+    #         executable = 'ros2_control_node',
+    #         namespace=arm,
+    #         parameters=[
+    #             os.path.join(ctrl_pkg_share, 'config', f'{arm}_controller.yaml'),
+    #             {
+    #                 'robot_description': ParameterValue(      
+    #                     Command(['xacro ', os.path.join(
+    #                         desc_pkg_share, 'urdf', f'{arm}.urdf.xacro'
+    #                     )]),
+    #                     value_type=str
+    #                 ),
+    #                 'use_sim_time': use_sim_time
+    #             }
+    #         ],
+    #         output = 'screen',
+    #     )
+    #     for arm in arms
+    # ]
     
     # Spawn controllers with delay_time so that rsp_node is up
     spawner_nodes = TimerAction(
@@ -92,7 +92,6 @@ def generate_launch_description():
             description = 'If true: use simulation clock time'
         ),
         desc_launch,
-        *controller_managers,
         spawner_nodes
     ])
     
