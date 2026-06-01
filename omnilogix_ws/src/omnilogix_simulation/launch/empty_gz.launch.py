@@ -31,7 +31,7 @@ def generate_launch_description():
             os.path.join(gz_pkg_share, 'launch', 'gz_sim.launch.py')
         ),
         launch_arguments = {
-            'gz_args': f'{world_file} -r -v4'
+            'gz_args': f'{world_file} -r -v1'
         }.items()
     )
     
@@ -45,7 +45,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'use_sim_time',
             default_value = 'true',
-            decsription = 'use_sim_time'
+            description = 'use_sim_time'
         ),
         gz_node,
         bridge_node
