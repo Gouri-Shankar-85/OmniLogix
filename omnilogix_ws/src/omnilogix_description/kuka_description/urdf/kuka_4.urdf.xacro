@@ -19,6 +19,9 @@
     <gazebo>
         <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
             <parameters>$(find omnilogix_controller)/config/kuka_4_controller.yaml</parameters>
+            <ros>
+                <namespace>kuka_4</namespace>
+            </ros>
         </plugin>
     </gazebo>
 
