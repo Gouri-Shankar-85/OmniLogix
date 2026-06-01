@@ -8,7 +8,8 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import (
     DeclareLaunchArgument,
     IncludeLaunchDescription,
-    TimerAction
+    TimerAction,
+    SetEnvironmentVariable
 )
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -23,6 +24,14 @@ def generate_launch_description():
     
     use_sim_time = LaunchConfiguration('use_sim_time')
     
+    desc_pkg = 'kuka_description'
+    desc_pkg_share = get_package_share_directory(desc_pkg)
+    
+    set_gz_resource_path = SetEnvironmentVariable(
+        name='GZ_SIM_RESOURCE_PATH',
+        value=os.path.dirname(desc_pkg_share)
+    )
+    
     sim_node = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(sim_pkg_share, 'launch', 'empty_gz.launch.py')
@@ -30,7 +39,12 @@ def generate_launch_description():
         launch_arguments = {'use_sim_time': use_sim_time}.items()
     )
     
-    arms = ['kuka_1', 'kuka_2', 'kuka_3', 'kuka_4']
+    arms = [
+        ('kuka_1',  0.0,  0.0, 0.0),
+        ('kuka_2',  5.0,  0.0, 0.0),
+        ('kuka_3',  0.0,  5.0, 0.0),
+        ('kuka_4',  5.0,  5.0, 0.0),
+    ]
     
     spawn_arms = TimerAction(
         period=5.0,                             
@@ -40,11 +54,14 @@ def generate_launch_description():
                 executable='create',
                 arguments=[
                     '-topic', f'/{arm}/robot_description',   
-                    '-name',  arm,                           
+                    '-name',  arm,        
+                    '-x', str(x),
+                    '-y', str(y),
+                    '-z', str(z),                   
                 ],
                 output='screen',
             )
-            for arm in arms
+            for arm, x, y, z in arms
         ]
     )
 
@@ -66,6 +83,7 @@ def generate_launch_description():
             default_value = 'true',
             description = 'use sim clock time'
         ),
+        set_gz_resource_path,
         sim_node,
         spawn_arms,
         kuka_arm_node
