@@ -25,19 +25,9 @@ def create_arm_group(kuka_id, xacro_path, use_sim_time):
             parameters = [{
                 'robot_description': robot_description, 
                 'use_sim_time': use_sim_time
-            }],    
-        ),
-        
-        Node(
-            package='joint_state_publisher_gui',
-            executable='joint_state_publisher_gui',
-            name='joint_state_publisher_gui',
-            parameters = [{
-                'robot_description': robot_description, 
-                'use_sim_time': use_sim_time
-            }],      
-            output='screen'
-        )   
+            }],  
+            output = 'screen'  
+        )  
     ])
 
 def generate_launch_description():
