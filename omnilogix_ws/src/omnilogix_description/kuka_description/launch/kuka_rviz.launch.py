@@ -12,7 +12,12 @@ from launch_ros.actions import Node, PushRosNamespace
 def create_arm_group(kuka_id, xacro_path, use_sim_time):
     
     robot_description = ParameterValue(
-        Command(['xacro ', xacro_path]),
+        Command([
+            'xacro ', xacro_path,
+            ' controller_path:=', os.path.join(
+                get_package_share_directory('omnilogix_controller'), 
+                    'config', f'{kuka_id}_controller.yaml')
+        ]),
         value_type=str
     )
     

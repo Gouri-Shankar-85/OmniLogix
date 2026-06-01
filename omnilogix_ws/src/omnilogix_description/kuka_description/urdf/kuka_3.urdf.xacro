@@ -16,9 +16,11 @@
 
     <xacro:kuka_kr16_2_ros2_control prefix="kuka_3_"/>
 
+    <xacro:arg name="controller_path" default="$(find omnilogix_controller)/config/kuka_3_controller.yaml"/>
+
     <gazebo>
         <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-            <parameters>$(find omnilogix_controller)/config/kuka_3_controller.yaml</parameters>
+            <parameters>${arg controller_path}</parameters>
             <ros>
                 <namespace>kuka_3</namespace>
             </ros>
