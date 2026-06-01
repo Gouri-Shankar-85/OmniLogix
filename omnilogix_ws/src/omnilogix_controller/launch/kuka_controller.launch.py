@@ -65,7 +65,10 @@ def generate_launch_description():
                 namespace = arm,
                 arguments = [
                     'joint_state_broadcaster',
-                    '--controller-manager', f'/{arm}/controller_manager'
+                    '--controller-manager', f'/{arm}/controller_manager',
+                    '--param-file', os.path.join(
+                        ctrl_pkg_share, 'config', f'{arm}_controller.yaml'
+                )
                 ],
                 output = 'screen',
             )
@@ -77,7 +80,10 @@ def generate_launch_description():
                 namespace = arm,
                 arguments = [
                     f'{arm}_controller',
-                    '--controller-manager', f'/{arm}/controller_manager'
+                    '--controller-manager', f'/{arm}/controller_manager',
+                    '--param-file', os.path.join(
+                        ctrl_pkg_share, 'config', f'{arm}_controller.yaml'
+                )
                 ],
                 output = 'screen',
             )
