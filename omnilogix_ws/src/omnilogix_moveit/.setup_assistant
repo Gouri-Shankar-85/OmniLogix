@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: kuka_description
+    relative_path: urdf/kuka_1.urdf.xacro
+  srdf:
+    relative_path: config/kuka_kr16_2.srdf
+  package_settings:
+    author_name: gs
+    author_email: sskzm5585@gmail.com
+    generated_timestamp: 1780380611
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

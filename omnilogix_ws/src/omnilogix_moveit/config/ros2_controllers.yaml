@@ -1,0 +1,27 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    kuka_1_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+kuka_1_controller:
+  ros__parameters:
+    joints:
+      - kuka_1_joint_a1
+      - kuka_1_joint_a2
+      - kuka_1_joint_a3
+      - kuka_1_joint_a4
+      - kuka_1_joint_a5
+      - kuka_1_joint_a6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true
